@@ -1,6 +1,6 @@
 Assembly Line Design
 
-Set up Process:
+Preparation:
 1. Spin up a new container.
 2. Git pull the source code. 
 --> How will the container have the right public key to verify with git?
