@@ -1,2 +1,2 @@
 #!/bin/bash
-git clone --single-branch $1
+git clone -q --single-branch $1 $2
