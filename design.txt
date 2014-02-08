@@ -1,0 +1,18 @@
+Assembly Line Design
+
+Set up Process:
+1. Spin up a new container.
+2. Git pull the source code. 
+--> How will the container have the right public key to verify with git?
+3. Analyze the source code.
+--> Static analysis plugins?
+
+Compiling (Android):
+1. Verify a build.xml is present, otherwise generate.
+2. ant debug
+--> Should signing of the app be supported? Hard unless you provide the key.
+3. Run tests
+
+Deploy:
+1. Email link to the APK to emails. 
+2. Archive APKs?
