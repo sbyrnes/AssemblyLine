@@ -2,10 +2,13 @@
  * Prep.js 
  * Prepares the project for building. 
  */
+// NPM Modules
 var sys  = require('sys')
 var exec = require('child_process').exec;
 var fs   = require('fs');
-var an   = require('./androidalyzer.js');
+
+// Custom source
+var an   = require('./androidalyzer');
 
 // Variables, these should be provided to us
 var repo 	   = "git@github.com:sbyrnes/Syrah.git";
