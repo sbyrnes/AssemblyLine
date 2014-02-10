@@ -12,7 +12,7 @@ var an   = require('./androidalyzer');
 
 // Variables, these should be provided to us
 var repo 	   = "git@github.com:sbyrnes/Syrah.git";
-var workingDir = "./workspace";
+var workingDir = "../workspace";
 
 /**********************************************************/
 // Step 1. Set up the workspace
@@ -55,5 +55,4 @@ function analyzeCode()
 /**********************************************************/
 // run
 console.log("Preparing workspace...");
-//setUpWorkspace(function() { pullCode(analyzeCode); });
-analyzeCode();
+setUpWorkspace(function() { pullCode(analyzeCode); });

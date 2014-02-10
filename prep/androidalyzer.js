@@ -23,7 +23,7 @@
  			var file = files[i];
  			var fullPathFile = currentRoot + '/' + file;
  			
- 			if(isManifest(file))
+ 			if(file == "AndroidManifest.xml")
  			{
  				console.log("Found manifest: " + fullPathFile);
  				callback(fullPathFile);
@@ -33,11 +33,6 @@
  			}
  		}
  	}
- }
- 
- function isManifest(file)
- {
- 	return file == "AndroidManifest.xml";
  }
  
  function verifyManifest(file)
