@@ -6,7 +6,8 @@ var restify  = require('restify');
 
 // Custom source
 var Preparer = require('./prep/prep');
-var httputils = require('./util/httputils');
+var Compiler = require('./compile/compile');
+var httputils = require('./httputils');
 
 console.log('Starting Assembly Line API Server...');
 
@@ -20,8 +21,13 @@ var server = restify.createServer();
 // Get
 server.get("/prepare", function (req, res, next) {
 	console.log('Preparing a new workspace');
-	var submissionRequest = httputils.extractURLData(req.url);
-	Preparer.prep(submissionRequest,
+	var parameters = httputils.extractURLData(req.url);
+	
+	var instanceId = new Date().getTime();
+	parameters["workingDir"] = "./workspace-" + instanceId;
+	
+	Preparer.prep(instanceId,
+				  parameters,
 				  function(json) { res.json(200, json); });
 	return next();
 });
@@ -31,6 +37,19 @@ server.get("/prepare", function (req, res, next) {
 // Compile APIs
 // Build an existing workspace
 // Get
+server.get("/compile", function (req, res, next) {
+	console.log('Compiling workspace');
+	var parameters = httputils.extractURLData(req.url);
+	
+	console.log("hello: " + JSON.stringify(parameters));
+	
+	var instanceId = parameters["id"];
+	
+	Compiler.compile(instanceId,
+				     parameters,
+				  	 function(json) { res.json(200, json); });
+	return next();
+});
 
 //================= SERVER START =================== //
 server.listen(8081, function() {
@@ -40,6 +59,6 @@ console.timeEnd('Server-Start');
 
 
 //================= SERVER END HOOK =================//
-process.on('SIGKILL', function () {
-	console.log('Goodbye');
-});
+//process.on('SIGKILL', function () {
+//	console.log('Goodbye');
+//});

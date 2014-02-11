@@ -35,13 +35,14 @@
  	}
  }
  
- function verifyManifest(file)
+ function verifyManifest(file, callback)
  {
  	console.log("Verifying manifest: " + file);
  	fs.readFile('/etc/passwd', function (err, data) {
   		if (err) throw err;
   		if(data.length > 0) {
   			console.log("CHECK Manifest OK");
+  			callback();
   		}
 	});
  }
