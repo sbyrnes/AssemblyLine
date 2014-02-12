@@ -70,9 +70,13 @@ Preparer.prototype.analyzeCode = function(callback)
 	
 	an.findAppRoot(this.workingDir, function(rootDir) {
 		self.output["appRoot"] = rootDir;
-		an.verifyManifest(rootDir, function() {
+		an.verifyManifest(rootDir + "/AndroidManifest.xml", function(appOutput) {
 			self.output["manifest"] = true;
-			callback(self.output);
+			self.output["app"] = appOutput;
+			an.verifyLibraries(rootDir + "/libs", function(libOutput) {
+				self.output["libs"] = libOutput;
+				callback(self.output);
+			});
 		});
 	});
 }

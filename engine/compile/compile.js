@@ -32,17 +32,12 @@ Compiler.prototype.setUpBuild = function(callback) {
 	console.log("1) Verifying build.xml in : " + this.workingDir);
 	var self = this;
 
- 	var files =	fs.readdirSync(this.workingDir);
- 		
- 	for(var i = 0; i < files.length; i++)
- 	{
- 		if(files[i].indexOf("build.xml") > -1)
- 		{
- 			console.log("Found build.xml");
-			self.output["buildXML"] = true;
- 			callback(); 
- 			return;
- 		}
+	if(hasBuildXML(this.workingDir))
+	{
+		console.log("Found build.xml");
+		self.output["buildXML"] = true;
+		callback(); 
+		return;
  	}
  	
  	console.log("No build.xml, need to create");
@@ -62,6 +57,22 @@ Compiler.prototype.setUpBuild = function(callback) {
 		}
 	});					   
  	
+}
+
+// Returns true if build.xml in the specified dir, false otherwise
+function hasBuildXML(dir)
+{
+ 	var files =	fs.readdirSync(dir);
+ 		
+ 	for(var i = 0; i < files.length; i++)
+ 	{
+ 		if(files[i].indexOf("build.xml") > -1)
+ 		{
+ 			return true;
+ 		}
+ 	}
+ 	
+ 	return false;
 }
 
 /**********************************************************/

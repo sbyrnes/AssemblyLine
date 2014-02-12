@@ -34,7 +34,7 @@ function findAppRoot(dir, callback)
 				if(file == "AndroidManifest.xml")
 				{
 					console.log("Found manifest: " + fullPathFile);
-					callback(fullPathFile);
+					callback(currentRoot);
 					break;
 				} else if (fs.statSync(fullPathFile).isDirectory()) {
 					dirStack.push(fullPathFile);
@@ -44,22 +44,52 @@ function findAppRoot(dir, callback)
  	}
  }
  
- function verifyManifest(file, callback)
+ function verifyManifest(manifestFile, callback)
  {
- 	console.log("Verifying manifest: " + file);
+ 	console.log("Verifying manifest: " + manifestFile);
  	var parser = new xml2js.Parser();
  	
- 	fs.readFile(file, function (err, data) {
+ 	fs.readFile(manifestFile, function (err, data) {
   		if (err) throw err;
   		
-  		parser.parseString(data, function (err, result) {
-			console.dir(result);
+  		parser.parseString(data, function (err, manifest) {
+  			var output = {};
+  		
+			console.dir(manifest);
+			
+			output["package"] = manifest.package;
+			output["version"] = manifest["android:versionName"];
 			
   			console.log("CHECK Manifest OK");
-  			callback();
+  			callback(output);
 		});
 	});
  }
  
- module.exports.findAppRoot	   = findAppRoot;
- module.exports.verifyManifest = verifyManifest;
+ function verifyLibraries(libDir, callback)
+ {
+ 	console.log("Verifying libraries in dir: " + libDir);
+ 	var output = {};
+ 	
+ 	var files =	fs.readdirSync(libDir);
+ 		
+ 	for(var i = 0; i < files.length; i++)
+ 	{
+ 		if(files[i].indexOf(".jar") > -1)
+ 		{
+ 			var libFile = files[i];
+ 			
+ 			var libStats = fs.statSync(libDir + "/" + libFile);
+ 			
+ 			output[libFile] = {};
+ 			output[libFile]["version"] = "1.0";
+ 			output[libFile]["size"] = libStats.size;
+ 		}
+ 	}
+  			
+  	callback(output);
+ }
+ 
+ module.exports.findAppRoot	    = findAppRoot;
+ module.exports.verifyManifest  = verifyManifest;
+ module.exports.verifyLibraries = verifyLibraries;
