@@ -4,6 +4,9 @@
 var fs = require('fs');
 var xml2js = require('xml2js');
 
+// Custom libraries
+var libMap = require('./libMap');
+
 var Androidalyzer = function (dir) {
 
 }
@@ -81,9 +84,24 @@ function findAppRoot(dir, callback)
  			
  			var libStats = fs.statSync(libDir + "/" + libFile);
  			
+ 			var fileSize = libStats.size;
+ 			
+ 			// See if we know what version of this library it is
+ 			var version = "unknown";
+ 			console.log("Determining version of : " + libFile + " ("+fileSize+")");
+ 			if(libMap[libFile])
+ 			{
+ 				if(libMap[libFile][fileSize])
+ 				{
+ 					version = libMap[libFile][fileSize];
+ 				} else { console.log("Size not mapped"); }
+ 			} else { console.log("File not mapped"); }
+ 			
  			output[libFile] = {};
- 			output[libFile]["version"] = "1.0";
- 			output[libFile]["size"] = libStats.size;
+ 			output[libFile]["version"] = version;
+ 			output[libFile]["size"] = fileSize;
+ 			
+ 			// Todo: Version should be derived from the library size for known libraries
  		}
  	}
   			

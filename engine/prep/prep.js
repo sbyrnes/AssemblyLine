@@ -8,7 +8,7 @@ var exec = require('child_process').exec;
 var fs   = require('fs');
 
 // Custom source
-var an   = require('./androidalyzer');
+var an     = require('./androidalyzer');
 
 var Preparer = function (instanceId, parameters) {
 	// Output struct
