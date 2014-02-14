@@ -4,6 +4,7 @@
 
 var libMap = {};
 
+/** FLURRY **/
 var flurry = new Array();
 flurry[1652495] = "test";
 flurry[1482364] = "3.1.0";
@@ -22,5 +23,11 @@ flurry[90392] = "3.3.3";
 flurry[90401] = "3.3.4"; 
 
 libMap["FlurryAgent.jar"] = flurry;
+
+/** NEW RELIC **/
+var newRelic = new Array();
+newRelic[440655] = "3.264.0"; 
+
+libMap["newrelic.android.jar"] = newRelic;
 
 module.exports = libMap;
