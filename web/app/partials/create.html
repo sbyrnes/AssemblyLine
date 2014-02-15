@@ -1,12 +1,11 @@
 <div class="container" style="padding:20px">
-  <!-- Example row of columns -->
   <div class="row">
-  	<div class="span4">
-          <form class="form">
+  	<div class="col-md-4">
+          <form novalidate class="form">
             <div class="form-group">
-              <input type="password" placeholder="Git Repository" class="form-control">
+              <input type="text" placeholder="Git Repository" class="form-control" ng-model="repo" />
             </div>
-            <button type="submit" class="btn btn-success">Create</button>
+            <button type="submit" class="btn btn-success" ng-click="create()">Create</button>
           </form>
     </div>
   </div>

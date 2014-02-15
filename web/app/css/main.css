@@ -4,10 +4,15 @@
    Author's custom styles
    ========================================================================== */
 
+footer {
+	padding   : 20px;
+	font-size : 8pt;
+}
 
-
-
-
+.logDisplay {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size : 8pt;
+}
 
 
 
