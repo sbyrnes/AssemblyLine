@@ -12,3 +12,10 @@ assemblyLineServices.factory('PrepareService', ['$resource',
       query: {method:'GET', params:{repo:'repo'}, isArray:false}
     });
   }]);
+ 
+assemblyLineServices.factory('BuildService', ['$resource',  
+  function($resource){
+    return $resource('http://localhost\:8081/compile', {}, {
+      query: {method:'GET', params:{appName:'appName', appRoot:'appRoot', androidTarget:'androidTarget'}, isArray:false}
+    });
+  }]);

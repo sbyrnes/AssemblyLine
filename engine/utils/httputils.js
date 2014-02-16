@@ -15,7 +15,8 @@ module.exports.extractURLData = function(myurl) {
 	
 	var resultData = raw.data ? JSON.parse(raw.data) : data;
 	
-	console.log("URL Data: " + resultData);
+	console.log("URL Data: ");
+	console.dir(resultData);
 	
 	return resultData;
 }
@@ -29,7 +30,8 @@ module.exports.extractPostData = function(req, callback) {
    req.on('end', function() {
       // parse the received body data
       var decodedBody = querystring.parse(fullBody);
-      console.log("Post Data: " + decodedBody);
+      console.log("Post Data: ");
+      console.dir(decodedBody);
 	  
       callback(decodedBody);
    });

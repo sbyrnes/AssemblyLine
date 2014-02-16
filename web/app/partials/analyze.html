@@ -1,24 +1,33 @@
 <div class="container" style="padding:20px">
   <!-- Loading Widget -->
-  <div id="loadingWidget" class="row-fluid ui-corner-all" style="padding: 0 .7em;" loading-widget >
-        <div class="loadingContent">
-            <p>
-                <img alt="Loading  Content" src="images/ajax-loader.gif" /> Loading
-            </p>
-        </div>
+  <div class="row" loading-display>
+  	<div class="col-md-8" style="text-align: center">
+		Loading<br/>
+		<img alt="Loading Content" src="img/ajax_loader_large.gif" /> 
+	</div>
   </div>
   <!-- Data Display -->
-  <div class="row">
+  <div class="row" loaded-widget>
   	<div class="col-md-1">App Info</div>
   	<div class="col-md-4">
-  		<ul>
-  			<li>ID: {{project_id}}</li>
-  			<li>AppRoot: {{appRoot}}</li>
-  			<li>Something</li>
-  		</ul>	
+		<table class="table">
+			<tr><td>ID</td><td>{{project_id}}</td></tr>
+  			<tr><td>AppRoot</td><td>{{appRoot}}</td></tr>
+  		</table>	
   	</div>
   </div>
-  <div class="row">
+  <div class="row" loaded-widget>
+  	<div class="col-md-1">Status</div>
+  	<div class="col-md-4">
+		<table class="table">
+			<tr><td>setup</td><td>{{setup}}</td></tr>
+  			<tr><td>pull</td><td>{{pull}}</td></tr>
+  			<tr><td>manifest</td><td>{{manifest}}</td></tr>
+  		</table>
+  	</div>
+  </div>
+  <hr/>
+  <div class="row" loaded-widget>
   	<div class="col-md-1">Libraries</div>
   	<div class="col-md-4">
 		<table class="table">
@@ -27,28 +36,24 @@
 				<th>Version</th>
 				<th>Size</th>
 			</tr>
-			<tr>
-				<td>hello</td>
-				<td>1.0</td>
-				<td>13234</td>
-			</tr>
 			<tr ng-repeat="lib in libs">
-				<td>{{lib}}</td>
+				<td>{{lib.name}}</td>
 				<td>{{lib.version}}</td>
 				<td>{{lib.size}}</td>
 			</tr>
 		</table>
   	</div>
   </div>
-  <div class="row">
+  <div class="row" loaded-widget>
   	<div class="col-md-4">
           <form novalidate class="form">
             <button type="submit" class="btn btn-success" ng-click="build()">Build</button>
           </form>
     </div>
   </div>
-  <div class="row">
-  	<div class="col-md-7 logDisplay">
+  <div class="row" loaded-widget>
+  	<div class="col-md-1">Raw JSON</div>
+  	<div class="col-md-4 logDisplay">
   		{{rawData}}
   	</div>
   </div>

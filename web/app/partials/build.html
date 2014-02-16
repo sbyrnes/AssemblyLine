@@ -1,5 +1,23 @@
-<div class="container" style="padding:20px">
-  <div class="row">
+<div class="container" style="padding:20px">  
+  <!-- Loading Widget -->
+  <div class="row" loading-display>
+  	<div class="col-md-8" style="text-align: center">
+		Loading<br/>
+		<img alt="Loading Content" src="img/ajax_loader_large.gif" /> 
+	</div>
+  </div>
+  <!-- Data Display -->
+  <div class="row" loaded-widget>
+  	<div class="col-md-1">Status</div>
+  	<div class="col-md-7">
+		<table class="table">
+			<tr><td>buildXML</td><td>{{rawData.buildXML}}</td><td ng-if="rawData.buildXML_file">{{rawData.buildXML_file}}</td></tr>
+  			<tr><td>compiled</td><td>{{rawData.compiled}}</td><td ng-if="rawData.APK">{{rawData.APK}}</td></tr>
+  			<tr><td>signed</td><td>{{rawData.signed}}</td></tr>
+  		</table>	
+  	</div>
+  </div>
+  <div class="row" loaded-widget>
   	<div class="col-md-1">Build Log</div>
   	<div class="col-md-7 logDisplay">
   		GET /app/js/filters.js Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36
@@ -14,7 +32,9 @@
 		GET /app/partials/build.html Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36
   	</div>
   </div>
-  <div class="row">
+  <hr/>
+  <div class="row" loaded-widget>
+  	<div class="col-md-1">Raw JSON</div>
   	<div class="col-md-7 logDisplay">
   		{{rawData}}
   	</div>

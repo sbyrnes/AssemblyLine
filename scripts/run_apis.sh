@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo "Starting APIs"
-node engine/AssemblyLineAPI.js
+cd engine; node AssemblyLineAPI.js
 
 echo "done"

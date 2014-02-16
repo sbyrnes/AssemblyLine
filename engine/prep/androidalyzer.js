@@ -98,6 +98,7 @@ function findAppRoot(dir, callback)
  			} else { console.log("File not mapped"); }
  			
  			output[libFile] = {};
+ 			output[libFile]["name"] = libFile;
  			output[libFile]["version"] = version;
  			output[libFile]["size"] = fileSize;
  			

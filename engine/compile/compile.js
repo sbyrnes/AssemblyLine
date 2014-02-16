@@ -50,7 +50,8 @@ Compiler.prototype.setUpBuild = function(callback) {
 	exec(generateCommand, function(error, stdout, stderr) {
 		if(!error){
 			console.log("build.xml created");
-			self.output["buildXML"] = true;
+			self.output["buildXML"] = "generated";
+			self.output["buildXML_file"] = self.workingDir + "/build.xml";
 			callback();
 		} else {
 			console.log(error);
@@ -86,7 +87,7 @@ Compiler.prototype.compileAPK = function(callback) {
 	exec(gitCommand, function(error, stdout, stderr) {
 		if(!error){
 			self.output["compiled"] = true;
-			self.output["APK"] = self.workingDir + "bin/" + self.appName + ".apk";
+			self.output["APK"] = self.workingDir + "/bin/" + self.appName + ".apk";
 			callback();
 		} else {
 			console.log(error);
