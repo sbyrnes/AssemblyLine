@@ -6,7 +6,7 @@ var libMap = {};
 
 /** FLURRY **/
 var flurry = new Array();
-flurry[1652495] = "test";
+flurry[1652495] = "4.1.test";
 flurry[1482364] = "3.1.0";
 flurry[1494870] = "3.1.1";	
 flurry[1652633] = "3.2.0.rc.1";	
@@ -22,12 +22,32 @@ flurry[90009] = "3.3.2";
 flurry[90392] = "3.3.3";	
 flurry[90401] = "3.3.4"; 
 
+flurry.latest = "4.2";
+
 libMap["FlurryAgent.jar"] = flurry;
 
 /** NEW RELIC **/
 var newRelic = new Array();
 newRelic[440655] = "3.264.0"; 
 
+newRelic.latest = "3.3";
+
 libMap["newrelic.android.jar"] = newRelic;
+
+/** Napdroid **/
+var napdroid = new Array();
+napdroid[4218] = "0.1"; 
+
+napdroid.latest = "0.1";
+
+libMap["napdroid.jar"] = napdroid;
+
+/** Simple Settings **/
+var simpleSettings = new Array();
+simpleSettings[4502] = "0.1"; 
+
+simpleSettings.latest = "0.1";
+
+libMap["simplesettings.jar"] = simpleSettings;
 
 module.exports = libMap;

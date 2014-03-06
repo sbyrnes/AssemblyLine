@@ -11,11 +11,11 @@ var AssemblyLineApp = angular.module('assemblyLine', [
 
 
 AssemblyLineApp.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
+  $routeProvider.when('/', {templateUrl: 'partials/create.html', controller: 'CreateController'});
   $routeProvider.when('/create', {templateUrl: 'partials/create.html', controller: 'CreateController'});
   $routeProvider.when('/analyze', {templateUrl: 'partials/analyze.html', controller: 'AnalyzeController'});
   $routeProvider.when('/build', {templateUrl: 'partials/build.html', controller: 'BuildController'});
-  $routeProvider.otherwise({redirectTo: '/'});
+  $routeProvider.otherwise({redirectTo: '/create'});
 }]);
 
 // For async loading screens

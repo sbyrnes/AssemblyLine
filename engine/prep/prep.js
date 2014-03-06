@@ -10,6 +10,9 @@ var fs   = require('fs');
 // Custom source
 var an     = require('./androidalyzer');
 
+// Map of repo to working directory so we don't check out everytime
+var repoMap = {};
+
 var Preparer = function (instanceId, parameters) {
 	// Output struct
 	this.output = {
@@ -45,20 +48,37 @@ Preparer.prototype.setUpWorkspace = function(callback) {
 /**********************************************************/
 // Step 2. Pull the code
 Preparer.prototype.pullCode = function(callback) {
-	var gitCommand = "./prep/git-pull.sh " + this.repo + " " + this.workingDir;
-	
 	var self = this;
+		
+		/** FOR TESTING
+		this.workingDir = "./workspace-1394087191598/Syrah/";
+		self.output["pull"] = "cached";
+		callback();
+		*/
 	
-	console.log("2) pulling code using command : " + gitCommand);
-	exec(gitCommand, function(error, stdout, stderr) {
-		if(!error){
-			self.output["pull"] = true;
-			callback();
-		} else {
-			console.log(error);
-			throw error;
-		}
-	});
+		
+	if(repoMap[this.repo])
+	{
+		this.workingDir = repoMap[this.repo];
+		self.output["pull"] = "cached";
+		callback();
+	} else {
+		var gitCommand = "./prep/git-pull.sh " + this.repo + " " + this.workingDir;
+	
+		console.log("2) pulling code using command : " + gitCommand);
+		exec(gitCommand, function(error, stdout, stderr) {
+			if(!error){
+				self.output["pull"] = true;
+			
+				repoMap[self.repo] = self.workingDir;
+			
+				callback();
+			} else {
+				console.log(error);
+				throw error;
+			}
+		});
+	}
 }
 
 /**********************************************************/

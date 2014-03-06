@@ -11,7 +11,6 @@ var fs   = require('fs');
 var androidSDK = "~/android-sdk-macosx";
 var antDir     = "~/Desktop/apache-ant-1.9.3/bin";
 
-
 var Compiler = function (instanceId, parameters) {
 	// Output struct
 	this.output = {
@@ -88,6 +87,7 @@ Compiler.prototype.compileAPK = function(callback) {
 		if(!error){
 			self.output["compiled"] = true;
 			self.output["APK"] = self.workingDir + "/bin/" + self.appName + ".apk";
+			
 			callback();
 		} else {
 			console.log(error);

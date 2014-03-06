@@ -1,35 +1,35 @@
 <div class="container" style="padding:20px">
   <!-- Loading Widget -->
   <div class="row" loading-display>
-  	<div class="col-md-8" style="text-align: center">
-		Loading<br/>
-		<img alt="Loading Content" src="img/ajax_loader_large.gif" /> 
+  	<div class="col-md-8">
+		Pulling and Analyzing...<span class="cursor">&nbsp;</span>
 	</div>
   </div>
   <!-- Data Display -->
   <div class="row" loaded-widget>
-  	<div class="col-md-1">App Info</div>
-  	<div class="col-md-4">
-		<table class="table">
-			<tr><td>ID</td><td>{{project_id}}</td></tr>
-  			<tr><td>AppRoot</td><td>{{appRoot}}</td></tr>
-  		</table>	
+  	<div class="col-md-12">
+		<div class="col-md-1"><strong>Statistics</strong></div>
+		<div class="col-md-5">
+			<table class="table">
+				<tr><td>Package</td><td>{{rawData.app.package}}</td></tr>
+				<tr><td>Version</td><td>{{rawData.app.version}}</td></tr>
+				<tr><td>Activities</td><td>{{rawData.app.activities}}</td></tr>
+				<tr><td>Target</td><td>{{rawData.app.target}}</td></tr>
+				<tr><td>Supported</td><td>{{rawData.app.supported}}</td></tr>
+			</table>
+		</div>
+		<div class="col-md-1"><strong>Status</strong></div>
+		<div class="col-md-4">
+			<table class="table">
+				<tr><td>setup</td><td>{{rawData.setup}}</td></tr>
+				<tr><td>pull</td><td>{{rawData.pull}}</td></tr>
+			</table>
+		</div>
   	</div>
   </div>
   <div class="row" loaded-widget>
-  	<div class="col-md-1">Status</div>
-  	<div class="col-md-4">
-		<table class="table">
-			<tr><td>setup</td><td>{{setup}}</td></tr>
-  			<tr><td>pull</td><td>{{pull}}</td></tr>
-  			<tr><td>manifest</td><td>{{manifest}}</td></tr>
-  		</table>
-  	</div>
-  </div>
-  <hr/>
-  <div class="row" loaded-widget>
-  	<div class="col-md-1">Libraries</div>
-  	<div class="col-md-4">
+  	<div class="col-md-1"><strong>Libraries</strong></div>
+  	<div class="col-md-6">
 		<table class="table">
 			<tr>
 				<th>Name</th>
@@ -40,17 +40,24 @@
 				<td>{{lib.name}}</td>
 				<td>{{lib.version}}</td>
 				<td>{{lib.size}}</td>
+				<td><a>View</a></td>
+				<td ng-if="!lib.latest">
+          			<form novalidate class="form">
+            			<button type="submit" class="btn btn-success" ng-click="upgrade()">Upgrade</button>
+            		</form>
+				</td>
 			</tr>
 		</table>
   	</div>
   </div>
   <div class="row" loaded-widget>
-  	<div class="col-md-4">
+  	<div class="col-md-6">
           <form novalidate class="form">
             <button type="submit" class="btn btn-success" ng-click="build()">Build</button>
           </form>
     </div>
   </div>
+  <hr/>
   <div class="row" loaded-widget>
   	<div class="col-md-1">Raw JSON</div>
   	<div class="col-md-4 logDisplay">

@@ -18,6 +18,9 @@ function HomeController($rootScope, $scope, $location) {
   }
 
 function CreateController($rootScope, $scope, $location) {
+	$scope.repo = "git@github.com:sbyrnes/Syrah.git";
+	$scope.appName = "My_App";
+
 	$scope.create = function() {
 		$location.path('/analyze').search('repo', $scope.repo).search('appName', $scope.appName);
 	};

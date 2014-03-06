@@ -15,49 +15,41 @@
 		}
 	</style>
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
         
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/main.css">
 
 	<!--[if lt IE 9]>
 		<script src="js/vendor/html5-3.6-respond-1.1.0.min.js"></script>
 	<![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Assembly Line</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#/">Home</a></li>
-            <li><a href="#/create">Create</a></li>
-            <!-- li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li-->
-          </ul>
-          <div class="nav navbar-nav navbar-right" style="color:white">
-          	{{repo}}<br/>
-          	{{project_id}}
-          </div>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+	<!-- Header -->
+    <div class="container">
+      	<div class="row">
+      		<div class="col-lg-7">
+				<div class="page-header">
+				  <h3>Assembly Line <small>The personal trainer for mobile app development.</small></h3>
+				</div>
+      		</div>
+			<div class="legend col-lg-1 col-lg-offset-2">  
+				<table>
+					<tr>
+						<th>repo:</th><td>{{repo}}</td>
+					</tr>
+					<tr>
+						<th>id:</th><td>{{project_id}}</td>
+					</tr>
+					<tr>
+						<th>dir:</th><td>{{appRoot}}</td>
+					</tr>
+					<tr>
+						<th>date:</th><td>03.05.2014</td>
+					</tr>
+				</table>        
+			</div>
+		</div>
+	</div>
 
 	<div ng-view></div>
 	

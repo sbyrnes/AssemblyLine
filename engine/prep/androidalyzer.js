@@ -11,6 +11,8 @@ var Androidalyzer = function (dir) {
 
 }
 
+var libVersionPattern = new RegExp(/\-v?([0-9\.]*)\.jar/);
+
 function findAppRoot(dir, callback)
 {
  	console.log("Looking for app root in: " + dir);
@@ -55,13 +57,22 @@ function findAppRoot(dir, callback)
  	fs.readFile(manifestFile, function (err, data) {
   		if (err) throw err;
   		
-  		parser.parseString(data, function (err, manifest) {
+  		parser.parseString(data, function (err, jsonData) {
   			var output = {};
+  			
+  			var manifest = jsonData['manifest'];
   		
-			console.dir(manifest);
+			var sdk = manifest["uses-sdk"][0];
 			
-			output["package"] = manifest.package;
-			output["version"] = manifest["android:versionName"];
+			var application = manifest.application[0];
+			
+			console.dir(manifest.application);
+			
+			output["package"] = manifest['$']['package'];
+			output["version"] = manifest['$']["android:versionName"];
+			output["target"] = sdk['$']["android:targetSdkVersion"];
+			output["supported"] = sdk['$']["android:minSdkVersion"];
+			output["activities"] = application.activity.length;
 			
   			console.log("CHECK Manifest OK");
   			callback(output);
@@ -88,19 +99,33 @@ function findAppRoot(dir, callback)
  			
  			// See if we know what version of this library it is
  			var version = "unknown";
+ 			var latest = false;
  			console.log("Determining version of : " + libFile + " ("+fileSize+")");
  			if(libMap[libFile])
  			{
  				if(libMap[libFile][fileSize])
  				{
  					version = libMap[libFile][fileSize];
- 				} else { console.log("Size not mapped"); }
- 			} else { console.log("File not mapped"); }
+ 					latest = version == libMap[libFile].latest;
+ 				} else { 
+ 					console.log("Size not mapped"); 
+ 				}
+ 			} else { 
+ 				console.log("File not mapped, trying to parse version");
+ 				var arrMatches = libFile.match(libVersionPattern);
+				if(arrMatches)
+				{
+					version = arrMatches[1];
+					console.log("Parsed version: " + version);
+					latest = true;
+				} 				 
+ 			}
  			
  			output[libFile] = {};
  			output[libFile]["name"] = libFile;
  			output[libFile]["version"] = version;
  			output[libFile]["size"] = fileSize;
+ 			output[libFile]["latest"] = latest;
  			
  			// Todo: Version should be derived from the library size for known libraries
  		}

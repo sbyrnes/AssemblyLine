@@ -10,17 +10,20 @@ MAINTAINER Sean Byrnes, sean@fogstack.com
 # make sure the package repository is up to date
 # RUN apt-get update
 
-# install nginx
-RUN apt-get install -y nginx
+# install required software
+RUN apt-get install -y nodejs
+RUN apt-get install -y git
 
-# configure nginx to not run in daemon mode (or else docker will think it exits immediately)
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-ADD ./setup/assembly.line.nginx /etc/nginx/sites-available/default
-RUN mkdir /var/www
-ADD ./setup/assembly.line.html /var/www/index.html
+# install the android SDK and images
+RUN wget http://dl.google.com/android/adt/adt-bundle-linux-x86_64-20131030.zip
+RUN gunzip adt-bundle-linux-x86_64-20131030.zip
 
-# export port 80
+# check out the Assembly Line code
+RUN git clone git@github.com:sbyrnes/AssemblyLine.git
+
+# export ports
 EXPOSE 8080
+EXPOSE 8081
 
 # start nginx
-ENTRYPOINT ["nginx"]
+ENTRYPOINT ["AssemblyLine/scripts/run_assemblyLine.sh"]
