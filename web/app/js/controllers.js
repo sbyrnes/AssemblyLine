@@ -6,6 +6,7 @@ var AssemblyLineApp = angular.module('assemblyLine.controllers', []);
 AssemblyLineApp.controller('HomeController', ['$rootScope', '$scope', '$location', HomeController]);
 AssemblyLineApp.controller('CreateController', ['$rootScope', '$scope', '$location', CreateController]);
 AssemblyLineApp.controller('AnalyzeController', ['$rootScope', '$scope', '$location', '$routeParams', 'PrepareService', '_START_REQUEST_', '_END_REQUEST_', AnalyzeController]);
+AssemblyLineApp.controller('AnalyzeLibController', ['$rootScope', '$scope', '$location', '$routeParams', '$window', 'PrepareService', '_START_REQUEST_', '_END_REQUEST_', AnalyzeLibController]);
 AssemblyLineApp.controller('BuildController', ['$rootScope', '$scope', '$routeParams', 'BuildService', '_START_REQUEST_', '_END_REQUEST_', BuildController]);
 AssemblyLineApp.run( function($rootScope) {
 	$rootScope.$broadcast('_END_REQUEST_');
@@ -44,10 +45,28 @@ function AnalyzeController($rootScope, $scope, $location, $routeParams, PrepareS
 		$scope.$broadcast(_END_REQUEST_);
 	  });
 
+	$scope.viewLib = function(libName) {
+		$location.path('/analyzeLib').search('libName', libName);
+	};
+
+	$scope.upgrade = function(libName) {
+		$location.path('/analyzeLib').search('libName', libName);
+	};
+
 	$scope.build = function() {
 		$location.path('/build').search('appRoot', $rootScope.appRoot).search('appName', $rootScope.appName);
 	};
   }
+  
+function AnalyzeLibController($rootScope, $scope, $location, $routeParams, $window, PrepareService, _START_REQUEST_, _END_REQUEST_) {
+	$scope.$broadcast(_START_REQUEST_);
+	$scope.libName = $routeParams.libName;
+	$scope.$broadcast(_END_REQUEST_);
+	
+	$scope.goBack = function() {
+		$window.history.back();
+	};
+}  
 
 function BuildController($rootScope, $scope, $routeParams, BuildService, _START_REQUEST_, _END_REQUEST_) {
 	$scope.$broadcast(_START_REQUEST_);

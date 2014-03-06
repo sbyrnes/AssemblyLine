@@ -14,6 +14,7 @@ AssemblyLineApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/create.html', controller: 'CreateController'});
   $routeProvider.when('/create', {templateUrl: 'partials/create.html', controller: 'CreateController'});
   $routeProvider.when('/analyze', {templateUrl: 'partials/analyze.html', controller: 'AnalyzeController'});
+  $routeProvider.when('/analyzeLib', {templateUrl: 'partials/analyze_lib.html', controller: 'AnalyzeLibController'});
   $routeProvider.when('/build', {templateUrl: 'partials/build.html', controller: 'BuildController'});
   $routeProvider.otherwise({redirectTo: '/create'});
 }]);

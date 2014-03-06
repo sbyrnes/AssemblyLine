@@ -1,10 +1,17 @@
-<div class="container" style="padding:20px">
+<div class="container">
   <!-- Loading Widget -->
   <div class="row" loading-display>
   	<div class="col-md-8">
 		Pulling and Analyzing...<span class="cursor">&nbsp;</span>
 	</div>
   </div>
+  <!-- Breadcrumb -->
+  <div class="row" loaded-widget>
+  	<div class="col-md-8">
+  		<h3 style="margin:0px">{{appName}}</h3>
+  	</div>
+  </div>
+  <hr/>
   <!-- Data Display -->
   <div class="row" loaded-widget>
   	<div class="col-md-12">
@@ -40,10 +47,10 @@
 				<td>{{lib.name}}</td>
 				<td>{{lib.version}}</td>
 				<td>{{lib.size}}</td>
-				<td><a>View</a></td>
+				<td><a ng-click="viewLib(lib.name)">View</a></td>
 				<td ng-if="!lib.latest">
           			<form novalidate class="form">
-            			<button type="submit" class="btn btn-success" ng-click="upgrade()">Upgrade</button>
+            			<button type="submit" class="btn btn-success" ng-click="upgrade(lib.name)">Upgrade</button>
             		</form>
 				</td>
 			</tr>
